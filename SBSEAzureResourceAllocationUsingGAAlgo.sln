@@ -5,7 +5,9 @@ VisualStudioVersion = 17.9.34723.18
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{151D2E53-A2C4-4D7D-83FE-D05416EBD58E}") = "SBSEAzureResourceAllocationUsingGAAlgo", "SBSEAzureResourceAllocationUsingGAAlgo.deployproj", "{45E59F1B-D94F-4F90-A444-ACBAD1DC6EC9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenaticAlgorithemResources", "..\GenaticAlgorithemResources\GenaticAlgorithemResources.csproj", "{A037BF44-8D93-4BE2-AA5A-241FE3370F63}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SBSECloudResourcesGAAlogoResources", "SBSECloudResourcesGAAlogoResources\SBSECloudResourcesGAAlogoResources.csproj", "{28B3876A-A327-47BC-8979-6B7683818D5B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GAAlogImplementationForARM", "GAAlogImplementationForARM\GAAlogImplementationForARM.csproj", "{24E1366F-9521-4F16-A142-2B8C64C713D6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +19,14 @@ Global
 		{45E59F1B-D94F-4F90-A444-ACBAD1DC6EC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{45E59F1B-D94F-4F90-A444-ACBAD1DC6EC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{45E59F1B-D94F-4F90-A444-ACBAD1DC6EC9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A037BF44-8D93-4BE2-AA5A-241FE3370F63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A037BF44-8D93-4BE2-AA5A-241FE3370F63}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A037BF44-8D93-4BE2-AA5A-241FE3370F63}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A037BF44-8D93-4BE2-AA5A-241FE3370F63}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28B3876A-A327-47BC-8979-6B7683818D5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28B3876A-A327-47BC-8979-6B7683818D5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28B3876A-A327-47BC-8979-6B7683818D5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28B3876A-A327-47BC-8979-6B7683818D5B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24E1366F-9521-4F16-A142-2B8C64C713D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24E1366F-9521-4F16-A142-2B8C64C713D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24E1366F-9521-4F16-A142-2B8C64C713D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24E1366F-9521-4F16-A142-2B8C64C713D6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
