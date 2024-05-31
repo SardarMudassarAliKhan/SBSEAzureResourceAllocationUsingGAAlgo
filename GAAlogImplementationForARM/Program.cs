@@ -1,69 +1,74 @@
 ﻿using GAAlogImplementationForARM;
-GeneticAlgorithm.Candidate bestCandidate = GeneticAlgorithm.Run();
-var armTemplate = new ARMTemplate
+using Newtonsoft.Json;
+internal class Program
 {
-    Schema = "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
-    ContentVersion = "1.0.0.0",
-    Parameters = new Parameters
+    private static void Main(string[] args)
     {
-        SkuName = new SkuNameParameter
+        GeneticAlgorithm.Candidate bestCandidate = GeneticAlgorithm.Run();
+        var armTemplate = new ARMTemplate
         {
-            Type = "string",
-            DefaultValue = bestCandidate.SkuName,
-            AllowedValues = new List<string>
+            Schema = "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+            ContentVersion = "1.0.0.0",
+            Parameters = new Parameters
+            {
+                SkuName = new SkuNameParameter
+                {
+                    Type = "string",
+                    DefaultValue = bestCandidate.SkuName,
+                    AllowedValues = new List<string>
                         {
                             "F1", "D1", "B1", "B2", "B3", "S1", "S2", "S3", "P1", "P2", "P3", "P4"
                         },
-            Metadata = new Metadata
+                    Metadata = new Metadata
+                    {
+                        Description = "Describes plan's pricing tier and instance size. Check details at https://azure.microsoft.com/en-us/pricing/details/app-service/"
+                    }
+                },
+                SkuCapacity = new SkuCapacityParameter
+                {
+                    Type = "int",
+                    DefaultValue = bestCandidate.SkuCapacity,
+                    MaxValue = 3,
+                    MinValue = 1,
+                    Metadata = new Metadata
+                    {
+                        Description = "Describes plan's instance count"
+                    }
+                },
+                SqlAdministratorLogin = new SqlAdministratorLoginParameter
+                {
+                    Type = "string",
+                    Metadata = new Metadata
+                    {
+                        Description = "The admin user of the SQL Server"
+                    }
+                },
+                SqlAdministratorLoginPassword = new SqlAdministratorLoginPasswordParameter
+                {
+                    Type = "secureString",
+                    Metadata = new Metadata
+                    {
+                        Description = "The password of the admin user of the SQL Server"
+                    }
+                },
+                Location = new LocationParameter
+                {
+                    Type = "string",
+                    DefaultValue = "[resourceGroup().location]",
+                    Metadata = new Metadata
+                    {
+                        Description = "Location for all resources."
+                    }
+                }
+            },
+            Variables = new Variables
             {
-                Description = "Describes plan's pricing tier and instance size. Check details at https://azure.microsoft.com/en-us/pricing/details/app-service/"
-            }
-        },
-        SkuCapacity = new SkuCapacityParameter
-        {
-            Type = "int",
-            DefaultValue = bestCandidate.SkuCapacity,
-            MaxValue = 3,
-            MinValue = 1,
-            Metadata = new Metadata
-            {
-                Description = "Describes plan's instance count"
-            }
-        },
-        SqlAdministratorLogin = new SqlAdministratorLoginParameter
-        {
-            Type = "string",
-            Metadata = new Metadata
-            {
-                Description = "The admin user of the SQL Server"
-            }
-        },
-        SqlAdministratorLoginPassword = new SqlAdministratorLoginPasswordParameter
-        {
-            Type = "secureString",
-            Metadata = new Metadata
-            {
-                Description = "The password of the admin user of the SQL Server"
-            }
-        },
-        Location = new LocationParameter
-        {
-            Type = "string",
-            DefaultValue = "[resourceGroup().location]",
-            Metadata = new Metadata
-            {
-                Description = "Location for all resources."
-            }
-        }
-    },
-    Variables = new Variables
-    {
-        HostingPlanName = "[format('hostingplan{0}', uniqueString(resourceGroup().id))]",
-        WebsiteName = "[format('website{0}', uniqueString(resourceGroup().id))]",
-        SqlserverName = "[format('sqlServer{0}', uniqueString(resourceGroup().id))]",
-        DatabaseName = "sampledb"
-    },
-    Resources = new List<Resource>
+                HostingPlanName = "[format('hostingplan{0}', uniqueString(resourceGroup().id))]",
+                WebsiteName = "[format('website{0}', uniqueString(resourceGroup().id))]",
+                SqlserverName = "[format('sqlServer{0}', uniqueString(resourceGroup().id))]",
+                DatabaseName = "sampledb"
+            },
+            Resources = new List<Resource>
                 {
                     new Resource
                     {
@@ -182,4 +187,13 @@ var armTemplate = new ARMTemplate
                         }
                     }
     }
-};
+
+        };
+
+        // Serialize to JSON and we will Generate the JSON file For ARM Template
+        string json = JsonConvert.SerializeObject(armTemplate, Formatting.Indented);
+        File.WriteAllText("WebsiteSQLDatabase.json", json);
+
+        Console.WriteLine("ARM Template JSON generated successfully.");
+    }
+}
